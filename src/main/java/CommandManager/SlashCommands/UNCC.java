@@ -20,6 +20,7 @@ import java.time.Duration;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class UNCC implements ISlashCommand {
     @Override
@@ -75,9 +76,9 @@ public class UNCC implements ISlashCommand {
                 JSONObject jsonObject = new JSONObject(response.body());
                 int responseCode = response.statusCode();
                 if(responseCode == 200){
-                    String currentOccupancy = jsonObject.getString("atkins_current_occupancy")
-                    if(currentOccupancy == "CLØSED"){
-                        event.getHook().editOriginal(jsonObject.getString("Atkins is closed.").queue();
+                    String currentOccupancy = jsonObject.getString("atkins_current_occupancy");
+                    if(Objects.equals(currentOccupancy, "CLØSED")){
+                        event.getHook().editOriginal(jsonObject.getString("Atkins is closed.")).queue();
                     } else {
                         event.getHook().editOriginal(currentOccupancy + " people in Atkins.").queue();
                     }
