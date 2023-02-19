@@ -73,19 +73,18 @@ public class UNCC implements ISlashCommand {
                         .uri(URI.create("https://library.charlotte.edu/resources/building_occupancy/atkins.json"))
                         .build();
                 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-                JSONObject jsonObject = new JSONObject(response.body());
                 int responseCode = response.statusCode();
-                if(responseCode == 200){
-                    String currentOccupancy = jsonObject.getString("atkins_current_occupancy");
-                    if(Objects.equals(currentOccupancy, "CLØSED")){
-                        event.getHook().editOriginal(jsonObject.getString("Atkins is closed.")).queue();
-                    } else {
+                JSONObject jsonObject = new JSONObject(response.body());
+                try {
+                    if(responseCode == 200) {
+                        int currentOccupancy = Integer.parseInt(jsonObject.getString("atkins_current_occupancy"));
                         event.getHook().editOriginal(currentOccupancy + " people in Atkins.").queue();
+                    } else {
+                        event.getHook().editOriginal(":x: Error fetching number: " + responseCode).queue();
                     }
-                } else {
-                    event.getHook().editOriginal(":x: Error loading canvas. Response: " + responseCode).queue();
+                } catch (NumberFormatException ex) {
+                    event.getHook().editOriginal("Atkins is closed.").queue();
                 }
-
             }
 
         }
