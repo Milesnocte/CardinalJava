@@ -25,12 +25,12 @@ public class SlashCommandManager
         addCommand(new Restart());
         addCommand(new Shutdown());
         addCommand(new TopConcentrations());
-        addCommand(new TopStars());
         addCommand(new StarCheck());
         addCommand(new Update());
         addCommand(new UNCC());
         addCommand(new LaTex());
         addCommand(new Christina());
+        addCommand(new Aprilfools());
     }
     
     private void addCommand(ISlashCommand c) {

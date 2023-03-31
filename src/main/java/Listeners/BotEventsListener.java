@@ -19,7 +19,8 @@ public class BotEventsListener extends ListenerAdapter
             "931663140687585290", // Party Hours
             "433825343485247499", // Woodward Hours
             "935650201291620392", // Charlotte Haven
-            "778743841187823636" // Fretwell hours
+            "778743841187823636", // Fretwell hours
+            "869677292610285628" // Test server
     };
     @Override
     public void onReady(ReadyEvent event) {

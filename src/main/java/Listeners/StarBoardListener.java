@@ -1,7 +1,7 @@
 package Listeners;
 
-import CommandManager.SlashCommands.UNCC;
 import Main.Credentials;
+import Main.Hikari;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.react.MessageReactionAddEvent;
@@ -15,7 +15,6 @@ import java.sql.*;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class StarBoardListener extends ListenerAdapter {
@@ -85,69 +84,65 @@ public class StarBoardListener extends ListenerAdapter {
 
     private boolean getExists(String messageID){
         try {
-            Class.forName("org.sqlite.JDBC");
-            Connection connect = DriverManager.getConnection("jdbc:sqlite:VCP.db");
-            Statement prepared = connect.createStatement();
-            ResultSet inStarBoard = prepared.executeQuery("SELECT EXISTS(SELECT 1 FROM StarBoard WHERE MessageID =  " + messageID + ");");
-            boolean exists = inStarBoard.getBoolean(1);
+            boolean result = false;
+            Connection connect = Hikari.getConnection();
+            ResultSet inStarBoard = connect.createStatement().executeQuery("SELECT * FROM starboard WHERE message_id = '" + messageID + "';");
+            result = inStarBoard.next();
             connect.close();
-            return exists;
+            return result;
         } catch (Exception ignored) {}
         return false;
     }
 
     private int getStars(String messageID) {
         try {
-            Class.forName("org.sqlite.JDBC");
-            Connection connect = DriverManager.getConnection("jdbc:sqlite:VCP.db");
-            Statement prepared = connect.createStatement();
-            ResultSet inStarBoard = prepared.executeQuery("SELECT Stars FROM StarBoard WHERE MessageID =  " + messageID + ";");
-            int messageIn = inStarBoard.getInt(1);
+            Connection connect = Hikari.getConnection();
+            ResultSet inStarBoard = connect.createStatement().executeQuery("SELECT stars FROM starboard WHERE message_id = '" + messageID + "';");
+            int result = 0;
+            if(inStarBoard.next()) {
+                result = inStarBoard.getInt(1);
+            }
             connect.close();
-            return messageIn;
+            return result;
         } catch (Exception ignored) {}
         return 0;
     }
 
     private boolean getPosted(String messageID){
         try {
-            Class.forName("org.sqlite.JDBC");
-            Connection connect = DriverManager.getConnection("jdbc:sqlite:VCP.db");
-            Statement prepared = connect.createStatement();
-            ResultSet inStarBoard = prepared.executeQuery("SELECT Posted FROM StarBoard WHERE MessageID =  " + messageID + ";");
-            boolean messagePosted = inStarBoard.getBoolean(1);
+            boolean result = false;
+            Connection connect = Hikari.getConnection();
+            ResultSet inStarBoard = connect.createStatement().executeQuery("SELECT posted FROM starboard WHERE message_id = '" + messageID + "';");
+            if(inStarBoard.next()) {
+                result = inStarBoard.getBoolean(1);
+                connect.close();
+            }
             connect.close();
-            return messagePosted;
+            return result;
         } catch (Exception ignored) {}
         return true;
     }
 
     private void addStar(String messageID){
         try {
-            Class.forName("org.sqlite.JDBC");
-            Connection connect = DriverManager.getConnection("jdbc:sqlite:VCP.db");
-            PreparedStatement prepared = connect.prepareStatement("UPDATE StarBoard SET Stars = Stars + 1 WHERE MessageID = " + messageID);
-            prepared.execute();
+            Connection connect = Hikari.getConnection();
+            connect.createStatement().execute("UPDATE starboard SET stars = stars + 1 WHERE message_id = '" + messageID + "';");
             connect.close();
         }catch (Exception ignored){}
     }
 
     private void revokeStar(String messageID){
         try {
-            Class.forName("org.sqlite.JDBC");
-            Connection connect = DriverManager.getConnection("jdbc:sqlite:VCP.db");
-            PreparedStatement prepared = connect.prepareStatement("UPDATE StarBoard SET Stars = Stars - 1 WHERE MessageID = " + messageID);
-            prepared.execute();
+            Connection connect = Hikari.getConnection();
+            connect.createStatement().execute("UPDATE starboard SET stars = stars - 1 WHERE message_id = '" + messageID + "';");
             connect.close();
         }catch (Exception ignored){}
     }
 
     private void setPosted(String messageID){
         try {
-            Class.forName("org.sqlite.JDBC");
-            Connection connect = DriverManager.getConnection("jdbc:sqlite:VCP.db");
-            PreparedStatement prepared = connect.prepareStatement("UPDATE StarBoard SET Posted = true WHERE MessageID = " + messageID);
-            prepared.execute();
+            Connection connect = Hikari.getConnection();
+            connect.createStatement().execute("UPDATE starboard SET posted = true WHERE message_id = '" + messageID + "';");
             connect.close();
         }catch (Exception ignored){}
     }
@@ -157,17 +152,18 @@ public class StarBoardListener extends ListenerAdapter {
         Message message = action.complete();
 
         try {
-            Class.forName("org.sqlite.JDBC");
-            Connection connect = DriverManager.getConnection("jdbc:sqlite:VCP.db");
+            Connection connect = Hikari.getConnection();
             PreparedStatement prepared;
-            prepared = connect.prepareStatement("INSERT INTO StarBoard values(?,?,?,?,?);");
+            prepared = connect.prepareStatement("INSERT INTO starboard values(?,?,?,?,?);");
             prepared.setString(1,event.getGuild().getId());
             prepared.setString(2, event.getMessageId());
             prepared.setString(3, message.getAuthor().getAsMention());
             prepared.setInt(4, 0);
-            prepared.setBoolean(5, false);
+            prepared.setInt(5, 0);
             prepared.execute();
-        } catch (Exception ignored) {
+            connect.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

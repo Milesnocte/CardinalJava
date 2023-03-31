@@ -65,9 +65,11 @@ public class MessageCmd extends ListenerAdapter
                         ).setRequiredRange(0, 6).setPlaceholder("Select Your Pronouns").build()
         );
         ActionRow PingsRow = ActionRow.of(
-                Button.primary("EventPing","Events"),
-                Button.primary("VCPing","VC Ping"),
-                Button.primary("ChatPing","Revive Chat")
+               // Button.primary("EventPing","Events"),
+               // Button.primary("VCPing","VC Ping"),
+               // Button.primary("ChatPing","Revive Chat")
+                Button.primary("MeetupPing","Meetup Pings"),
+                Button.primary("EventPing", "Event Pings")
         );
 
         ActionRow AlumnRoles = ActionRow.of(
@@ -76,14 +78,45 @@ public class MessageCmd extends ListenerAdapter
                 Button.primary("Alum_PHD","PHD")
         );
 
+        ActionRow CollegeRow = ActionRow.of(
+                SelectMenu.create("college")
+                    .addOptions(
+                            SelectOption.of("Data Science", "College_Data"),
+                            SelectOption.of("Liberal Arts and Sciences", "College_Liberal"),
+                            SelectOption.of("Health and Human Services", "College_Health"),
+                            SelectOption.of("Engineering", "College_Engineering"),
+                            SelectOption.of("Education", "College_Education"),
+                            SelectOption.of("Computing and Informatics", "College_Computing"),
+                            SelectOption.of("Arts and Architectures", "College_Arts"),
+                            SelectOption.of("Business", "College_Business"),
+                            SelectOption.of("Undeclared", "College_Undec")
+                    ).setRequiredRange(0, 2).setPlaceholder("Select Your Major(s)").build()
+        );
+
+        ActionRow ConcentrationRow = ActionRow.of(
+                SelectMenu.create("concentration")
+                        .addOptions(
+                                SelectOption.of("Software Engineering", "Conc_SE"),
+                                SelectOption.of("Bioinformatics", "Conc_Bioinformatics"),
+                                SelectOption.of("AI, Robotics, and Gaming", "Conc_ARG"),
+                                SelectOption.of("Data Science", "Conc_DataScience"),
+                                SelectOption.of("Information Technology", "Conc_IT"),
+                                SelectOption.of("Web and Mobile", "Conc_WM"),
+                                SelectOption.of("Human-Computer Interaction", "Conc_HCI"),
+                                SelectOption.of("Cybersecurity", "Conc_Cybersecurity"),
+                                SelectOption.of("Software, Systems, and Networks", "Conc_SSN"),
+                                SelectOption.of("Undeclared", "Conc_UD")
+                        ).setRequiredRange(0, 1).setPlaceholder("Select Your Concentration").build()
+        );
+
 
         if (event.getAuthor().getId().equals("225772174336720896") && event.getMessage().getContentRaw().startsWith("$combinedmenu")) {
             event.getMessage().delete().queue();
             EmbedBuilder embed = new EmbedBuilder();
-            embed.setImage("https://cdn.discordapp.com/attachments/1040674718941978695/1057823881378943128/Fe-o0I0XwAUQiWK.jpg");
+            embed.setImage("https://cdn.discordapp.com/attachments/482254335666028574/991745222637785158/LinkedIn_cover_-_1.png");
             embed.setTitle("Roles Menu");
-            embed.setDescription("Below you can select your roles. These are cosmetic and let others \nknow more about you!");
-            event.getChannel().sendMessageEmbeds(embed.build()).setActionRows(SchoolsRow, YearRow, PronRow).queue();
+            embed.setDescription("Below you can select your Year, Major(s), and Concentration.");
+            event.getChannel().sendMessageEmbeds(embed.build()).setActionRows(YearRow, CollegeRow, ConcentrationRow).queue();
             embed.clear();
             embed.setTitle("Ping Roles");
             embed.setDescription("Click the buttons below to be added to the ping roles. \nIf you have the role clicking it will remove you from it!");

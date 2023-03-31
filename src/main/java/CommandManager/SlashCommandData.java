@@ -48,31 +48,21 @@ public class SlashCommandData {
                     new SubcommandData("living", "create a living situation role menu")
             ),
             Commands.slash("topconcentrations", "Get concentrations leaderboard"),
-            Commands.slash("settings", "Server Settings")
-                    .addSubcommandGroups(
-                    new SubcommandGroupData("set", "Set command")
-                            .addSubcommands(
-                                    new SubcommandData("star", "Set the star emote"),
-                                    new SubcommandData("antistar", "Set the anti-star emote"),
-                                    new SubcommandData("joinlogchannel", "Set the join log channel"),
-                                    new SubcommandData("welcomechannel", "Set the welcome channel")
-                            ),
-                    new SubcommandGroupData("toggle", "Toggle command")
-                            .addSubcommands(
-                                    new SubcommandData("joinleavelogs", "Toggle join leave logging"),
-                                    new SubcommandData("welcomechannel", "Toggle welcome channel"),
-                                    new SubcommandData("starboard", "Toggle starboard"))
-            ),
             Commands.slash("uncc", "Role Menus")
-                    .addSubcommands(new SubcommandData("sovi", "Get the occupancy of sovi"),
-                    new SubcommandData("crown", "Get the occupancy of crown"),
-                    new SubcommandData("parking", "Get the occupancy of parking"),
-                    new SubcommandData("canvas", "Canvas status"),
-                    new SubcommandData("atkins", "Atkins status")
+                    .addSubcommands(
+                            new SubcommandData("sovi", "Get the occupancy of sovi"),
+                        new SubcommandData("crown", "Get the occupancy of crown"),
+                        new SubcommandData("parking", "Get the occupancy of parking"),
+                        new SubcommandData("canvas", "Canvas status"),
+                        new SubcommandData("atkins", "Atkins status")
             ),
             Commands.slash("starcheck", "Check the number of stars a user has")
                     .addOption(
                     OptionType.USER, "user", "The user to check", false
+            ),
+            Commands.slash("aprilfools", "This command does absolutely nothing :clueless:")
+                    .addOption(
+                    OptionType.STRING, "phase", "This command does absolutely nothing :clueless:", true
             )
     };
 }

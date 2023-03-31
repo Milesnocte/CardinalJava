@@ -1,6 +1,7 @@
 package CommandManager.SlashCommands;
 
 import CommandManager.ISlashCommand;
+import Main.Hikari;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.SelectMenuInteractionEvent;
@@ -20,13 +21,14 @@ public class StarCheck implements ISlashCommand {
         } else {
             author = event.getMember().getUser().getAsMention();
         }
-        int stars = 0;
-        try {
-            HashMap<String, Integer> userlist = getStarsSum(event);
-            stars = userlist.get(author);
-        } catch (Exception ignored) {
-        }
 
+        int stars = 0;
+
+        try {
+            stars = Integer.parseInt(getStarsSum(event));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         String starsFormat = NumberFormat.getNumberInstance().format(stars);
 
@@ -63,15 +65,25 @@ public class StarCheck implements ISlashCommand {
         return null;
     }
 
-    public HashMap<String, Integer> getStarsSum(SlashCommandInteractionEvent event) throws ClassNotFoundException, SQLException {
-        Class.forName("org.sqlite.JDBC");
-        Connection connect = DriverManager.getConnection("jdbc:sqlite:VCP.db");
-        Statement prepared = connect.createStatement();
-        ResultSet result = prepared.executeQuery("SELECT Author, SUM(Stars) FROM StarBoard WHERE GuildID ='" + event.getGuild().getId() + "' GROUP BY Author ORDER BY SUM(Stars);");
-        HashMap<String, Integer> users = new HashMap<>();
-        while (result.next()) {
-            users.put(result.getString("Author"), result.getInt("SUM(Stars)"));
+    public String getStarsSum(SlashCommandInteractionEvent event) throws ClassNotFoundException, SQLException {
+        String author;
+        String stars;
+        if (event.getOption("user") != null) {
+            author = event.getOption("user").getAsUser().getId();
+        } else {
+            author = event.getMember().getUser().getId();
         }
-        return users;
+        Connection connect = Hikari.getConnection();
+        ResultSet result = connect.createStatement().executeQuery("SELECT sum(stars) FROM starboard WHERE guild_id ='"+ event.getGuild().getId() +"' AND author ilike '%"+ author +"%';");
+
+        if(result.next()) {
+            stars = result.getString(1);
+            connect.close();
+            return stars;
+        }
+        else
+        {
+            return "0";
+        }
     }
 }
