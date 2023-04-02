@@ -15,8 +15,8 @@ public class Hikari
     {
         config.setDriverClassName("org.postgresql.Driver");
         config.setJdbcUrl("jdbc:postgresql://" + Credentials.PostgresIP + "/Cardinal");
-        config.setUsername("postgres");
-        config.setPassword(Credentials.PostgresPW);
+        config.setUsername(Credentials.PostgresUser);
+        config.setPassword(Credentials.PostgresPassword);
         config.addDataSourceProperty("sslmode", "require");
         ds = new HikariDataSource(config);
     }
