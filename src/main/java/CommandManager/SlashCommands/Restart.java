@@ -15,7 +15,7 @@ public class Restart implements ISlashCommand {
         if (event.getMember().getId().equals(Credentials.OWNER)) {
             event.reply("Restarting...").queue();
             Thread.sleep(1000);
-            Runtime.getRuntime().exec("sh woody.sh");
+            Runtime.getRuntime().exec("sh cardinal.sh");
             System.exit(0);
         }
         event.reply("Why would you even try this command? (Not Bot Owner)").queue();

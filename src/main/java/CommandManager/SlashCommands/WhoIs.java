@@ -53,7 +53,7 @@ public class WhoIs implements ISlashCommand {
             embed.addField("ID", user.getId(), true);
             embed.addField("Roles", roles.toString(), false);
             if (member.getId().equals(Credentials.OWNER)) {
-                embed.setFooter("\u2B50 Woody dev \u2B50");
+                embed.setFooter("\u2B50 Cardinal dev \u2B50");
             }
             event.getHook().editOriginalEmbeds(embed.build()).queue();
 

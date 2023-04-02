@@ -1,10 +1,10 @@
-# WoodyBot
-Woody is a University Discord automation bot Using the JDA Wrapper. Woody has many useful features such as role assignment menues and a message purge command. Woody also has a few fun features like eightball and a define a word command.  
+# Cardinal
+Cardinal is a University Discord automation bot Using the JDA Wrapper. Cardinal has many useful features such as role assignment menus and a message purge command. Cardinal also has a few fun features like eightball and a define a word command.  
 
-## Inviting Woody to a server
-Woody uses slash commands, so it must have `&scope=bot+applications.commands` at the end of the invite url. 
+## Inviting Cardinal to a server
+Cardinal uses slash commands, so it must have `&scope=bot+applications.commands` at the end of the invite url. 
 
-To function Woody also requires the following permissions:
+To function Cardinal also requires the following permissions:
 - View Channels
 - Manage Roles
 - Send Messages
