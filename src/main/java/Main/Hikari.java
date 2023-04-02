@@ -18,6 +18,9 @@ public class Hikari
         config.setUsername(Credentials.PostgresUser);
         config.setPassword(Credentials.PostgresPassword);
         config.addDataSourceProperty("sslmode", "require");
+        config.addDataSourceProperty("cachePrepStmts", "true");
+        config.addDataSourceProperty("prepStmtCacheSize", "250");
+        config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
         ds = new HikariDataSource(config);
     }
 
