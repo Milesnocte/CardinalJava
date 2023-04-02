@@ -37,7 +37,6 @@ public class SlashCommandData {
             Commands.slash("restart", "restart the bot"),
     };
     public static final CommandData[] UNCCcommands = {
-            Commands.slash("christina", "Femnocte Pic"),
             Commands.slash("menus", "Role Menus")
                     .addSubcommands(
                     new SubcommandData("yearroles", "create a year role menu"),
@@ -47,7 +46,6 @@ public class SlashCommandData {
                     new SubcommandData("platforms", "create a gaming platform role menu"),
                     new SubcommandData("living", "create a living situation role menu")
             ),
-            Commands.slash("topconcentrations", "Get concentrations leaderboard"),
             Commands.slash("uncc", "Role Menus")
                     .addSubcommands(
                             new SubcommandData("sovi", "Get the occupancy of sovi"),
@@ -60,9 +58,5 @@ public class SlashCommandData {
                     .addOption(
                     OptionType.USER, "user", "The user to check", false
             ),
-            Commands.slash("aprilfools", "This command does absolutely nothing :clueless:")
-                    .addOption(
-                    OptionType.STRING, "phase", "This command does absolutely nothing :clueless:", true
-            )
     };
 }

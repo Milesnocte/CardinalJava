@@ -24,13 +24,9 @@ public class SlashCommandManager
         addCommand(new EightBall());
         addCommand(new Restart());
         addCommand(new Shutdown());
-        addCommand(new TopConcentrations());
         addCommand(new StarCheck());
-        addCommand(new Update());
         addCommand(new UNCC());
         addCommand(new LaTex());
-        addCommand(new Christina());
-        addCommand(new Aprilfools());
     }
     
     private void addCommand(ISlashCommand c) {

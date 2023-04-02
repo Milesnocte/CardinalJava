@@ -22,7 +22,7 @@ public class Stats implements ISlashCommand {
         EmbedBuilder embed = new EmbedBuilder();
         embed.setColor(Color.cyan);
         embed.setDescription("**Cardinal By MilesNocte**");
-        embed.addField("**Woody's Stats**", "`Ping:` " + currentTime + "ms" +
+        embed.addField("**Cardinal's Stats**", "`Ping:` " + currentTime + "ms" +
                 "\n`Gateway Ping:` " + event.getJDA().getGatewayPing() + "ms" +
                 "\n`Guilds:` " + event.getJDA().getGuilds().size() +
                 "\n`Bot ID:` " + event.getJDA().getSelfUser().getId() +

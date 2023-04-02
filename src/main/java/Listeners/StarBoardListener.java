@@ -142,7 +142,7 @@ public class StarBoardListener extends ListenerAdapter {
     private void setPosted(String messageID){
         try {
             Connection connect = Hikari.getConnection();
-            connect.createStatement().execute("UPDATE starboard SET posted = true WHERE message_id = '" + messageID + "';");
+            connect.createStatement().execute("UPDATE starboard SET posted = 1 WHERE message_id = '" + messageID + "';");
             connect.close();
         }catch (Exception ignored){}
     }
