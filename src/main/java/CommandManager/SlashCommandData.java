@@ -33,6 +33,8 @@ public class SlashCommandData {
                     .addOption(
                     OptionType.STRING, "question", "Ask the 8-ball a question.", true
             ),
+            Commands.slash("rank", "Get current rank")
+                    .addOption(OptionType.USER, "user", "Check a users rank", false),
             Commands.slash("shutdown", "shutdown the bot"),
             Commands.slash("restart", "restart the bot"),
     };
@@ -46,17 +48,19 @@ public class SlashCommandData {
                     new SubcommandData("platforms", "create a gaming platform role menu"),
                     new SubcommandData("living", "create a living situation role menu")
             ),
-            Commands.slash("uncc", "Role Menus")
-                    .addSubcommands(
-                            new SubcommandData("sovi", "Get the occupancy of sovi"),
-                        new SubcommandData("crown", "Get the occupancy of crown"),
-                        new SubcommandData("parking", "Get the occupancy of parking"),
-                        new SubcommandData("canvas", "Canvas status"),
-                        new SubcommandData("atkins", "Atkins status")
-            ),
             Commands.slash("starcheck", "Check the number of stars a user has")
                     .addOption(
                     OptionType.USER, "user", "The user to check", false
             ),
+            /*
+            Commands.slash("uncc", "Role Menus")
+                    .addSubcommands(
+                    new SubcommandData("sovi", "Get the occupancy of sovi"),
+                    new SubcommandData("crown", "Get the occupancy of crown"),
+                    new SubcommandData("parking", "Get the occupancy of parking"),
+                    new SubcommandData("canvas", "Canvas status"),
+                    new SubcommandData("atkins", "Atkins status")
+            ),
+             */
     };
 }

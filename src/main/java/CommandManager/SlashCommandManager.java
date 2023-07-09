@@ -27,6 +27,7 @@ public class SlashCommandManager
         addCommand(new StarCheck());
         addCommand(new UNCC());
         addCommand(new LaTex());
+        addCommand(new Rank());
     }
     
     private void addCommand(ISlashCommand c) {

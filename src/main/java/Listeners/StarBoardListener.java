@@ -12,6 +12,7 @@ import net.dv8tion.jda.api.requests.RestAction;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.*;
+import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -154,12 +155,13 @@ public class StarBoardListener extends ListenerAdapter {
         try {
             Connection connect = Hikari.getConnection();
             PreparedStatement prepared;
-            prepared = connect.prepareStatement("INSERT INTO starboard values(?,?,?,?,?);");
+            prepared = connect.prepareStatement("INSERT INTO starboard values(?,?,?,?,?,?);");
             prepared.setString(1,event.getGuild().getId());
             prepared.setString(2, event.getMessageId());
             prepared.setString(3, message.getAuthor().getAsMention());
             prepared.setInt(4, 0);
             prepared.setInt(5, 0);
+            prepared.setTimestamp(6, Timestamp.from(Instant.now()));
             prepared.execute();
             connect.close();
         } catch (Exception e) {

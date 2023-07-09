@@ -1,5 +1,6 @@
 import java.util.concurrent.TimeUnit;
 
+import Listeners.XpListener;
 import Main.Credentials;
 import Main.MessageCmd;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -20,7 +21,7 @@ public class JDA extends ListenerAdapter implements EventListener
         DefaultShardManagerBuilder
                 .create(GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGE_REACTIONS, GatewayIntent.GUILD_VOICE_STATES,
                         GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES, GatewayIntent.GUILD_PRESENCES,
-                        GatewayIntent.GUILD_MESSAGES)
+                        GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_EMOJIS_AND_STICKERS)
                 .setToken(Credentials.TOKEN)
                 .setMemberCachePolicy(MemberCachePolicy.ALL)
                 .setChunkingFilter(ChunkingFilter.ALL)
@@ -29,7 +30,8 @@ public class JDA extends ListenerAdapter implements EventListener
                         new BotEventsListener(),
                         new JoinLeaveListener(),
                         new StarBoardListener(),
-                        new MessageCmd()
+                        new MessageCmd(),
+                        new XpListener()
                 ).setStatus(OnlineStatus.ONLINE).build();
                 
         TimeUnit.SECONDS.sleep(3);

@@ -20,7 +20,7 @@ public class WhoIs implements ISlashCommand {
             event.deferReply(false).queue();
             String userid;
             if (event.getOption("user") != null) {
-                userid = event.getOption("user").getAsMember().getId();
+                userid = event.getOption("user").getAsUser().getId();
             } else {
                 userid = event.getMember().getId();
             }
