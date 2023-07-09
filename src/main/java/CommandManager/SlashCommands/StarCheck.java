@@ -4,12 +4,10 @@ import CommandManager.ISlashCommand;
 import Main.Hikari;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
-import net.dv8tion.jda.api.events.interaction.component.SelectMenuInteractionEvent;
-
+import net.dv8tion.jda.api.events.interaction.component.StringSelectInteractionEvent;
 import java.sql.*;
 import java.text.NumberFormat;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
 public class StarCheck implements ISlashCommand {
@@ -33,7 +31,7 @@ public class StarCheck implements ISlashCommand {
         String starsFormat = NumberFormat.getNumberInstance().format(stars);
 
         event.reply(author + " has " + starsFormat + "<:starfroot:991751462302519316>")
-                .allowedMentions(Collections.emptyList()).queue();
+                .setAllowedMentions(Collections.emptyList()).queue();
     }
 
     @Override
@@ -41,7 +39,7 @@ public class StarCheck implements ISlashCommand {
     }
 
     @Override
-    public void run(SelectMenuInteractionEvent event) throws Exception {
+    public void run(StringSelectInteractionEvent event) throws Exception {
 
     }
 

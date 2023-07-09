@@ -1,9 +1,9 @@
 package CommandManager;
 
 import java.util.List;
-import net.dv8tion.jda.api.events.interaction.component.SelectMenuInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.component.StringSelectInteractionEvent;
 
 public interface ISlashCommand
 {
@@ -11,7 +11,7 @@ public interface ISlashCommand
     
     void run(ButtonInteractionEvent event) throws Exception;
     
-    void run(SelectMenuInteractionEvent event) throws Exception;
+    void run(StringSelectInteractionEvent event) throws Exception;
     
     List<String> buttons();
     

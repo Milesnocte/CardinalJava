@@ -4,16 +4,16 @@ import java.util.ArrayList;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Role;
-import net.dv8tion.jda.api.events.interaction.component.SelectMenuInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.component.StringSelectInteractionEvent;
 import net.dv8tion.jda.api.interactions.components.ActionRow;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.interactions.components.selections.SelectOption;
 import net.dv8tion.jda.api.interactions.components.selections.SelectMenu;
-import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-
 import java.util.List;
 import java.util.Random;
 import java.util.regex.Pattern;
+
+import net.dv8tion.jda.api.interactions.components.selections.StringSelectMenu;
 import org.jetbrains.annotations.NotNull;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -33,7 +33,7 @@ public class MessageCmd extends ListenerAdapter
     public void onMessageReceived(@NotNull final MessageReceivedEvent event) {
         if(UNCCServers.contains(event.getGuild().getId())) {
             ActionRow SchoolsRow = ActionRow.of(
-                    SelectMenu.create("schools").addOptions(
+                    StringSelectMenu.create("schools").addOptions(
                             SelectOption.of("UNCG", "UNCG"),
                             SelectOption.of("ECU", "ECU"),
                             SelectOption.of("NCSU", "NCSU"),
@@ -55,7 +55,7 @@ public class MessageCmd extends ListenerAdapter
                     ).setRequiredRange(0, 1).setPlaceholder("Select Your School").build()
             );
             ActionRow YearRow = ActionRow.of(
-                    SelectMenu.create("years").addOptions(
+                    StringSelectMenu.create("years").addOptions(
                             SelectOption.of("Incoming Student", "Year_Incoming"),
                             SelectOption.of("Freshman", "Year_Freshman"),
                             SelectOption.of("Sophomore", "Year_Sophomore"),
@@ -66,7 +66,7 @@ public class MessageCmd extends ListenerAdapter
                     ).setRequiredRange(0, 1).setPlaceholder("Select Your Year").build()
             );
             ActionRow PronRow = ActionRow.of(
-                    SelectMenu.create("pronouns")
+                    StringSelectMenu.create("pronouns")
                             .addOptions(
                                     SelectOption.of("He/Him", "Pron_He"),
                                     SelectOption.of("She/Her", "Pron_She"),
@@ -91,7 +91,7 @@ public class MessageCmd extends ListenerAdapter
             );
 
             ActionRow CollegeRow = ActionRow.of(
-                    SelectMenu.create("college")
+                    StringSelectMenu.create("college")
                             .addOptions(
                                     SelectOption.of("Data Science", "College_Data"),
                                     SelectOption.of("Liberal Arts and Sciences", "College_Liberal"),
@@ -106,7 +106,7 @@ public class MessageCmd extends ListenerAdapter
             );
 
             ActionRow ConcentrationRow = ActionRow.of(
-                    SelectMenu.create("concentration")
+                    StringSelectMenu.create("concentration")
                             .addOptions(
                                     SelectOption.of("Software Engineering", "Conc_SE"),
                                     SelectOption.of("Bioinformatics", "Conc_Bioinformatics"),
@@ -128,11 +128,11 @@ public class MessageCmd extends ListenerAdapter
                 embed.setImage("https://cdn.discordapp.com/attachments/482254335666028574/991745222637785158/LinkedIn_cover_-_1.png");
                 embed.setTitle("Roles Menu");
                 embed.setDescription("Below you can select your Year, Major(s), and Concentration.");
-                event.getChannel().sendMessageEmbeds(embed.build()).setActionRows(YearRow, CollegeRow, ConcentrationRow).queue();
+                event.getChannel().sendMessageEmbeds(embed.build()).setComponents(YearRow, CollegeRow, ConcentrationRow).queue();
                 embed.clear();
                 embed.setTitle("Ping Roles");
                 embed.setDescription("Click the buttons below to be added to the ping roles. \nIf you have the role clicking it will remove you from it!");
-                event.getChannel().sendMessageEmbeds(embed.build()).setActionRows(PingsRow).queue();
+                event.getChannel().sendMessageEmbeds(embed.build()).setComponents(PingsRow).queue();
             }
 
             if (event.getAuthor().getId().equals("225772174336720896") && event.getMessage().getContentRaw().startsWith("$alum")) {
@@ -140,12 +140,12 @@ public class MessageCmd extends ListenerAdapter
                 EmbedBuilder embed = new EmbedBuilder();
                 embed.setTitle("Alum Roles");
                 embed.setDescription("Select your highest completed degree!");
-                event.getChannel().sendMessageEmbeds(embed.build()).setActionRows(AlumnRoles).queue();
+                event.getChannel().sendMessageEmbeds(embed.build()).setComponents(AlumnRoles).queue();
             }
 
             if (event.getAuthor().getId().equals("225772174336720896") && event.getMessage().getContentRaw().startsWith("$me")) {
                 if (event.getMessage().getReferencedMessage() != null) {
-                    event.getChannel().sendMessage(event.getMessage().getContentRaw().replaceFirst(Pattern.quote("$me "), "")).reference(event.getMessage().getReferencedMessage()).queue();
+                    event.getChannel().sendMessage(event.getMessage().getContentRaw().replaceFirst(Pattern.quote("$me "), "")).setMessageReference(event.getMessage().getReferencedMessage()).queue();
                     event.getMessage().delete().queue();
                 } else {
                     event.getMessage().delete().queue();
@@ -154,7 +154,7 @@ public class MessageCmd extends ListenerAdapter
             }
 
             if (event.getMessage().getContentRaw().startsWith("$rphroles") && event.getAuthor().getId().equals("225772174336720896")) {
-                event.getChannel().sendMessage("Select game ping roles, if im missing any let me know, these are easy to add").setActionRows(ActionRow.of(SelectMenu.create("rphgames").addOptions(SelectOption.of("CSGO", "CSGO"), SelectOption.of("Valorant", "Valorant"), SelectOption.of("Overcooked 2", "Overcooked 2"), SelectOption.of("TF2", "TF2"), SelectOption.of("League", "League"), SelectOption.of("Overwatch", "Overwatch")).setRequiredRange(1, 5).setPlaceholder("Select games").build())).queue();
+                event.getChannel().sendMessage("Select game ping roles, if im missing any let me know, these are easy to add").setComponents(ActionRow.of(StringSelectMenu.create("rphgames").addOptions(SelectOption.of("CSGO", "CSGO"), SelectOption.of("Valorant", "Valorant"), SelectOption.of("Overcooked 2", "Overcooked 2"), SelectOption.of("TF2", "TF2"), SelectOption.of("League", "League"), SelectOption.of("Overwatch", "Overwatch")).setRequiredRange(1, 5).setPlaceholder("Select games").build())).queue();
             }
 
             if (event.getGuild().getId().equals("931663140687585290") && event.getMessage().getContentRaw().startsWith("!")) {
@@ -182,9 +182,9 @@ public class MessageCmd extends ListenerAdapter
             }
         }
     }
-    
+
     @Override
-    public void onSelectMenuInteraction(@NotNull final SelectMenuInteractionEvent event) {
+    public void onStringSelectInteraction(@NotNull final StringSelectInteractionEvent event) {
         if(event.getGuild().getId().equals("931663140687585290")) {
             Role Chillin = event.getGuild().getRolesByName("Chillin", true).get(0);
             Role Weeb = event.getGuild().getRolesByName("Weeb", true).get(0);

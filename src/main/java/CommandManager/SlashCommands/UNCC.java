@@ -4,23 +4,17 @@ import CommandManager.ISlashCommand;
 import Main.FetchUNCC;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
-import net.dv8tion.jda.api.events.interaction.component.SelectMenuInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.component.StringSelectInteractionEvent;
+import net.dv8tion.jda.api.utils.AttachedFile;
 import org.json.JSONObject;
-
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.text.NumberFormat;
-import java.time.Duration;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
 
 public class UNCC implements ISlashCommand {
     @Override
@@ -32,9 +26,9 @@ public class UNCC implements ISlashCommand {
                 String openMessage = FetchUNCC.openInfo("SoVi")[1];
                 String openLabel = FetchUNCC.openInfo("SoVi")[0].toLowerCase();
                 if(openLabel.equals("open")){
-                    event.getHook().editOriginal(new File("./img/sovi.png")).setContent("Sovi Occupancy: " + openMessage).queue();
+                    event.getHook().editOriginalAttachments(AttachedFile.fromData(new File("./img/sovi.png"))).setContent("Sovi Occupancy: " + openMessage).queue();
                 } else {
-                    event.getHook().editOriginal(new File("./img/closed.png")).setContent(openMessage).queue();
+                    event.getHook().editOriginalAttachments(AttachedFile.fromData(new File("./img/closed.png"))).setContent(openMessage).queue();
                 }
 
             }
@@ -43,14 +37,14 @@ public class UNCC implements ISlashCommand {
                 String openMessage = FetchUNCC.openInfo("Crown Commons")[1];
                 String openLabel = FetchUNCC.openInfo("Crown Commons")[0].toLowerCase();
                 if(openLabel.equals("open")) {
-                    event.getHook().editOriginal(new File("./img/crown.png")).setContent("Crown Occupancy: " + openMessage).queue();
+                    event.getHook().editOriginalAttachments(AttachedFile.fromData(new File("./img/crown.png"))).setContent("Crown Occupancy: " + openMessage).queue();
                 } else {
-                    event.getHook().editOriginal(new File("./img/closed.png")).setContent(openMessage).queue();
+                    event.getHook().editOriginalAttachments(AttachedFile.fromData(new File("./img/closed.png"))).setContent(openMessage).queue();
                 }
             }
 
             case "parking" ->
-                event.getHook().editOriginal(new File("./img/parking.png")).setContent("Parking Availability").queue();
+                event.getHook().editOriginalAttachments(AttachedFile.fromData(new File("./img/parking.png"))).setContent("Parking Availability").queue();
 
             case "canvas" -> {
                 HttpClient client = HttpClient.newHttpClient();
@@ -96,7 +90,7 @@ public class UNCC implements ISlashCommand {
     }
 
     @Override
-    public void run(SelectMenuInteractionEvent event) throws Exception {
+    public void run(StringSelectInteractionEvent event) throws Exception {
 
     }
 

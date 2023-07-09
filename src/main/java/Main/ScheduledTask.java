@@ -7,7 +7,7 @@ import java.text.NumberFormat;
 import java.util.Calendar;
 import java.util.TimerTask;
 import java.util.Timer;
-import net.dv8tion.jda.api.events.ReadyEvent;
+import net.dv8tion.jda.api.events.session.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class ScheduledTask extends ListenerAdapter

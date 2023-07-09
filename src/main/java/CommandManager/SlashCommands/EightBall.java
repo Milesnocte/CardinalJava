@@ -4,7 +4,8 @@ import CommandManager.ISlashCommand;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
-import net.dv8tion.jda.api.events.interaction.component.SelectMenuInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.component.StringSelectInteractionEvent;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -20,7 +21,7 @@ public class EightBall implements ISlashCommand {
                 "My sources say no", "Very doubtful", "My reply is no"};
 
         event.reply("\uD83D\uDE4B: " + event.getOption("question").getAsString() + "\n\uD83C\uDFB1: " + answers[roll])
-                .allowedMentions(Collections.singleton(Message.MentionType.USER)).queue();
+                .setAllowedMentions(Collections.singleton(Message.MentionType.USER)).queue();
     }
 
     @Override
@@ -28,7 +29,7 @@ public class EightBall implements ISlashCommand {
     }
 
     @Override
-    public void run(SelectMenuInteractionEvent event) throws Exception {
+    public void run(StringSelectInteractionEvent event) throws Exception {
 
     }
 

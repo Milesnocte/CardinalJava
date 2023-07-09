@@ -1,9 +1,10 @@
 package CommandManager;
 
 import CommandManager.SlashCommands.*;
-import net.dv8tion.jda.api.events.interaction.component.SelectMenuInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.component.StringSelectInteractionEvent;
+import org.postgresql.shaded.com.ongres.scram.common.bouncycastle.pbkdf2.Strings;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -64,7 +65,7 @@ public class SlashCommandManager
         }
     }
     
-    void run(SelectMenuInteractionEvent event) throws Exception {
+    void run(StringSelectInteractionEvent event) throws Exception {
         String name = event.getComponentId();
         if (event.getUser().isBot()) {
             return;

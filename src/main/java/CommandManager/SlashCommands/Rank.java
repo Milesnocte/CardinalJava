@@ -6,8 +6,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
-import net.dv8tion.jda.api.events.interaction.component.SelectMenuInteractionEvent;
-
+import net.dv8tion.jda.api.events.interaction.component.StringSelectInteractionEvent;
 import java.sql.*;
 import java.util.Collections;
 import java.util.HashMap;
@@ -128,7 +127,7 @@ public class Rank implements ISlashCommand {
     }
 
     @Override
-    public void run(SelectMenuInteractionEvent event) throws Exception {
+    public void run(StringSelectInteractionEvent event) throws Exception {
 
     }
 

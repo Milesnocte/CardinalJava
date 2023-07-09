@@ -3,13 +3,14 @@ package RoleMenus;
 import net.dv8tion.jda.api.interactions.components.selections.SelectOption;
 import net.dv8tion.jda.api.interactions.components.selections.SelectMenu;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.interactions.components.selections.StringSelectMenu;
 
 public class RWHSlashMenus
 {
     public static void SlashConcetrationMenu(SlashCommandInteractionEvent event) {
         event.reply("\n**__What is your concentration?__**\n")
                 .addActionRow(
-                        SelectMenu.create("concentration")
+                        StringSelectMenu.create("concentration")
                                 .addOptions(
                                         SelectOption.of("Software Engineering", "Conc_SE"),
                                         SelectOption.of("Bioinformatics", "Conc_Bioinformatics"),

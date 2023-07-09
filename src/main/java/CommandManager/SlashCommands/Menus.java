@@ -3,7 +3,6 @@ package CommandManager.SlashCommands;
 import java.util.Arrays;
 import net.dv8tion.jda.api.entities.Role;
 import java.util.Objects;
-import net.dv8tion.jda.api.events.interaction.component.SelectMenuInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import RoleMenus.RWHSlashMenus;
 import RoleMenus.SlashMenus;
@@ -12,6 +11,7 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import java.util.ArrayList;
 import java.util.List;
 import CommandManager.ISlashCommand;
+import net.dv8tion.jda.api.events.interaction.component.StringSelectInteractionEvent;
 
 public class Menus implements ISlashCommand
 {
@@ -146,7 +146,7 @@ public class Menus implements ISlashCommand
     }
     
     @Override
-    public void run(SelectMenuInteractionEvent event) throws Exception {
+    public void run(StringSelectInteractionEvent event) throws Exception {
         if (Objects.equals(event.getComponent().getId(), "college")) {
             List<Role> collegeRoles = new ArrayList<>();
             for (String collegeName : this.collegeNames) {

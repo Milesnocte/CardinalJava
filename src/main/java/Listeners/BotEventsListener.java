@@ -6,19 +6,14 @@ import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Guild;
 import Main.ScheduledTask;
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.emoji.Emoji;
-import net.dv8tion.jda.api.entities.emoji.RichCustomEmoji;
 import net.dv8tion.jda.api.events.message.MessageDeleteEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.MessageUpdateEvent;
+import net.dv8tion.jda.api.events.session.ReadyEvent;
 import org.jetbrains.annotations.NotNull;
-import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-
 import java.text.NumberFormat;
 import java.util.HashMap;
-import java.util.concurrent.TimeUnit;
 
 public class BotEventsListener extends ListenerAdapter
 {
@@ -31,6 +26,8 @@ public class BotEventsListener extends ListenerAdapter
             "778743841187823636", // Fretwell hours
             "869677292610285628" // Test server
     };
+
+
 
     @Override
     public void onReady(ReadyEvent event) {
