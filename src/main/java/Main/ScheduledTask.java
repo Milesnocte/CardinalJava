@@ -3,6 +3,7 @@ package Main;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Guild;
 
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.Calendar;
 import java.util.TimerTask;
@@ -20,10 +21,13 @@ public class ScheduledTask extends ListenerAdapter
             public void run() {
 
                 Calendar cal = Calendar.getInstance();
+                int hour = cal.get(Calendar.HOUR_OF_DAY);
                 int minute = cal.get(Calendar.MINUTE);
-                if (minute % 10 == 0) {
+
+                if (minute % 5 == 0)
+                {
                     try {
-                        //new FetchUNCC().screenshot();
+                        new FetchUNCC().screenshot();
                         int users = 0;
                         for (Guild guild : event.getJDA().getGuilds()) {
                             users += guild.getMemberCount();
@@ -32,6 +36,16 @@ public class ScheduledTask extends ListenerAdapter
                         event.getJDA().getPresence().setActivity(Activity.watching( userCount + " Users"));
                     }
                     catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                if(hour == 1 && minute == 0)
+                {
+                    try {
+                        Runtime.getRuntime().exec("sh cardinal.sh");
+                        System.exit(0);
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }

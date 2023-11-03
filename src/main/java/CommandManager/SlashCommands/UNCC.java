@@ -26,18 +26,18 @@ public class UNCC implements ISlashCommand {
                 String openMessage = FetchUNCC.openInfo("SoVi")[1];
                 String openLabel = FetchUNCC.openInfo("SoVi")[0].toLowerCase();
                 if(openLabel.equals("open")){
-                    event.getHook().editOriginalAttachments(AttachedFile.fromData(new File("./img/sovi.png"))).setContent("Sovi Occupancy: " + openMessage).queue();
+                    event.getHook().editOriginalAttachments(AttachedFile.fromData(new File("./img/sovi.png"))).setContent("Sovi: " + openMessage).queue();
                 } else {
                     event.getHook().editOriginalAttachments(AttachedFile.fromData(new File("./img/closed.png"))).setContent(openMessage).queue();
                 }
 
             }
 
-            case "crown" -> {
-                String openMessage = FetchUNCC.openInfo("Crown Commons")[1];
-                String openLabel = FetchUNCC.openInfo("Crown Commons")[0].toLowerCase();
+            case "social_704" -> {
+                String openMessage = FetchUNCC.openInfo("Social 704")[1];
+                String openLabel = FetchUNCC.openInfo("Social 704")[0].toLowerCase();
                 if(openLabel.equals("open")) {
-                    event.getHook().editOriginalAttachments(AttachedFile.fromData(new File("./img/crown.png"))).setContent("Crown Occupancy: " + openMessage).queue();
+                    event.getHook().editOriginalAttachments(AttachedFile.fromData(new File("./img/crown.png"))).setContent("Social 704: " + openMessage).queue();
                 } else {
                     event.getHook().editOriginalAttachments(AttachedFile.fromData(new File("./img/closed.png"))).setContent(openMessage).queue();
                 }
@@ -64,7 +64,7 @@ public class UNCC implements ISlashCommand {
             case "atkins" -> {
                 HttpClient client = HttpClient.newHttpClient();
                 HttpRequest request = HttpRequest.newBuilder()
-                        .uri(URI.create("https://library.charlotte.edu/resources/building_occupancy/atkins.json"))
+                        .uri(URI.create("https://atkinsapi.charlotte.edu/occupancy/get/"))
                         .build();
                 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
                 int responseCode = response.statusCode();

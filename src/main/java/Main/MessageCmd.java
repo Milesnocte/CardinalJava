@@ -171,10 +171,11 @@ public class MessageCmd extends ListenerAdapter
                         case "bambi" -> event.getChannel().sendMessage("bank babe").queue();
                         case "kels" -> event.getChannel().sendMessage("Mom of the server").queue();
                         case "carney" -> event.getChannel().sendMessage("looking for: brown girl").queue();
-                        case "moe" -> event.getChannel().sendMessage("Chick magnet").queue();
+                        case "moe" -> event.getChannel().sendMessage("Got dommed by a githyanki in less than 5 hours").queue();
                         case "yosi" -> event.getChannel().sendMessage("https://tenor.com/view/big-bird-angry-door-fall-gif-11404358").queue();
                         case "lefty" -> event.getChannel().sendMessage("ginger giant").queue();
                         case "mitchell" -> event.getChannel().sendMessage("SASS Lord").queue();
+                        case "ting" -> event.getChannel().sendMessage("Boba addict").queue();
                     }
                 } else {
                     event.getChannel().sendMessage("https://tenor.com/view/who-dat-snoop-gif-15116696").queue();

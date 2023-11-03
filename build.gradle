@@ -22,7 +22,7 @@ repositories {
 dependencies {
     implementation 'org.jetbrains:annotations:23.0.0'
     implementation group: 'org.scilab.forge', name: 'jlatexmath', version: '1.0.7'
-    implementation 'net.dv8tion:JDA:5.0.0-beta.12'
+    implementation 'net.dv8tion:JDA:5.0.0-beta.17'
     implementation 'ch.qos.logback:logback-classic:1.2.11'
     implementation 'com.vdurmont:emoji-java:5.1.1'
     implementation 'org.jsoup:jsoup:1.15.3'

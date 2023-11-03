@@ -52,15 +52,13 @@ public class SlashCommandData {
                     .addOption(
                     OptionType.USER, "user", "The user to check", false
             ),
-            /*
             Commands.slash("uncc", "Role Menus")
                     .addSubcommands(
                     new SubcommandData("sovi", "Get the occupancy of sovi"),
-                    new SubcommandData("crown", "Get the occupancy of crown"),
+                    new SubcommandData("social_704", "Get the occupancy of social 704"),
                     new SubcommandData("parking", "Get the occupancy of parking"),
                     new SubcommandData("canvas", "Canvas status"),
                     new SubcommandData("atkins", "Atkins status")
-            ),
-             */
+            )
     };
 }

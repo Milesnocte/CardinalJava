@@ -68,7 +68,7 @@ public class FetchUNCC {
             sovi.quit();
         }
 
-        String crownLabel = FetchUNCC.openInfo("Crown Commons")[0].toLowerCase();
+        String crownLabel = FetchUNCC.openInfo("Social 704")[0].toLowerCase();
         if(crownLabel.equals("open")) {
             WebDriver crown = new ChromeDriver(options);
             String crownurl = "https://app.safespace.io/api/display/live-occupancy/7a9c0a24?view=percent";

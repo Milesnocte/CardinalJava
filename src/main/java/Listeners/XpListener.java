@@ -116,7 +116,7 @@ public class XpListener extends ListenerAdapter {
                                 int res = 0;
 
                                 iterator:
-                                for (int i = 0; i < 55100; i++) {
+                                for (int i = 0; i < 10000; i++) {
                                     res += (5 * Math.pow(i, 2) + 50 * i + 100);
                                     if (res > value) {
                                         level = i;
@@ -129,9 +129,7 @@ public class XpListener extends ListenerAdapter {
                                 List<Role> rolesToAdd = new ArrayList<>();
 
                                 // ROOT
-                                if (level >= 1) {
-                                    rolesToAdd.add(RankRoles.get(0));
-                                }
+                                rolesToAdd.add(RankRoles.get(0));
 
                                 // RUNG
                                 if (level >= 5) {
@@ -161,7 +159,9 @@ public class XpListener extends ListenerAdapter {
                                 try {
                                     BeanZone.modifyMemberRoles(member, rolesToAdd, Collections.emptyList()).queue();
                                 }
-                                catch (Exception ignored) {}
+                                catch (Exception e) {
+                                    e.printStackTrace();
+                                }
                             }
                         });
                         Long end = System.currentTimeMillis();
@@ -170,6 +170,6 @@ public class XpListener extends ListenerAdapter {
                         e.printStackTrace();
                     }
                 }
-            }, 0, 5 * 60 * 1000);
+            }, 0, 10 * 60 * 1000);
     }
 }

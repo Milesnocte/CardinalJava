@@ -29,7 +29,7 @@ public class Menus implements ISlashCommand
         pronounNames = new ArrayList<>(List.of("He/Him", "She/Her", "They/Them", "He/They", "She/They", "Ask pronouns"));
         collegeNames = new ArrayList<>(List.of("Data Science", "Liberal Arts & Sciences", "Health & Human Services", "Engineering", "Education", "Computing & Informatics", "Arts + Architecture", "Business", "Undeclared"));
         concentrationNames = new ArrayList<>(List.of("software-eng", "bio-inf", "ai-gaming", "data-sci", "info-tech", "web-mobile", "hci", "cyber-sec", "software-systems", "Undeclared"));
-        schoolNames = new ArrayList<>(List.of("UNCG", "ECU", "NCSU", "WCU", "UNC", "UNCC", "UNCW", "NCA&T", "APP", "UNCA", "ECSU", "WSSU", "FSU", "NCCU", "UNCP", "NCSA", "NCSSM", "Future Student"));
+        schoolNames = new ArrayList<>(List.of("UNCG", "ECU", "NCSU", "WCU", "UNC", "CLT", "UNCW", "NCA&T", "APP", "UNCA", "ECSU", "WSSU", "FSU", "NCCU", "UNCP", "NCSA", "NCSSM", "Future Student"));
         livingNames = new ArrayList<>(List.of("On Campus", "Off Campus", "Commuter"));
         alumRoles = new ArrayList<>(List.of("PHD", "Masters", "Bachelors"));
         platformNames = new ArrayList<>(List.of("PC Gamers", "XBOX Gamers", "Mobile Gamers", "Playstation Gamers", "Switch Gamers"));

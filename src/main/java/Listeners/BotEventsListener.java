@@ -1,6 +1,7 @@
 package Listeners;
 
 import CommandManager.SlashCommandData;
+import Main.FetchUNCC;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Guild;
@@ -22,12 +23,8 @@ public class BotEventsListener extends ListenerAdapter
     private String[] UNCCServers = {
             "931663140687585290", // Party Hours
             "433825343485247499", // Woodward Hours
-            "935650201291620392", // Charlotte Haven
-            "778743841187823636", // Fretwell hours
             "869677292610285628" // Test server
     };
-
-
 
     @Override
     public void onReady(ReadyEvent event) {
@@ -46,7 +43,7 @@ public class BotEventsListener extends ListenerAdapter
         }
 
         try {
-            //new FetchUNCC().screenshot();
+            new FetchUNCC().screenshot();
             int users = 0;
             for (Guild guild : event.getJDA().getGuilds()) {
                 users += guild.getMemberCount();
@@ -68,7 +65,7 @@ public class BotEventsListener extends ListenerAdapter
 
             EmbedBuilder embedBuilder = new EmbedBuilder();
             embedBuilder.setAuthor("@" + member.getUser().getAsTag().split("#")[0], member.getEffectiveAvatarUrl());
-            embedBuilder.setDescription("Message deleted in " + event.getChannel().getAsMention());
+            embedBuilder.setDescription("Message edited in " + event.getChannel().getAsMention());
             embedBuilder.addField("Old Message", messageArray[1], false);
             embedBuilder.addField("Message", event.getMessage().getContentRaw(), false);
 
@@ -105,12 +102,15 @@ public class BotEventsListener extends ListenerAdapter
             }
         }
 
-            if (event.getMessage().getContentRaw().contains("1984") && event.getGuild().getId().equals("776380239961260052")) {
-                try {
-                    event.getMessage().addReaction(event.getJDA().getGuildById("433825343485247499").getEmojiById("874821152650965022")).queue();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        String message = event.getMessage().getContentRaw();
+        String regex = ".*(?<![0-9])1984(?![0-9]).*";
+
+        if (message.matches(regex)) {
+            try {
+                event.getMessage().addReaction(event.getJDA().getGuildById("433825343485247499").getEmojiById("874821152650965022")).queue();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }
