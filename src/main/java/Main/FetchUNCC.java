@@ -50,7 +50,7 @@ public class FetchUNCC {
     public void screenshot() throws IOException, InterruptedException {
         TimeUnit.SECONDS.sleep(3L);
         System.out.println(
-                "\n\n********************************\n***   Fetching UNCC Pages   ***\n********************************\n\n");
+                "\n********************************\n***   Fetching UNCC Pages   ***\n********************************\n");
         System.setProperty("webdriver.gecko.driver", "chromedriver");
         System.setProperty("webdriver.chrome.verboseLogging", "true");
 
@@ -80,15 +80,15 @@ public class FetchUNCC {
             crown.quit();
         }
 
-        ChromeOptions parkingOptions = new ChromeOptions().addArguments("--headless=new");
+        ChromeOptions parkingOptions = new ChromeOptions().addArguments("--headless=new").addArguments("--window-size=1920,1080");
         WebDriver parking = new ChromeDriver(parkingOptions);
         String parkingurl = "https://parkingavailability.charlotte.edu/";
         parking.get(parkingurl);
         parking.manage().timeouts().implicitlyWait(Duration.ofSeconds(10L));
         WebElement list = parking.findElement(By.className("mat-list"));
-        Screenshot p = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000)).takeScreenshot(parking);
+        Screenshot p = new AShot().shootingStrategy(ShootingStrategies.simple()).takeScreenshot(parking);
         BufferedImage listScreenshot = p.getImage().getSubimage(list.getLocation().getX(), list.getLocation().getY(),
-                list.getSize().getWidth() / 2, list.getSize().getHeight());
+                list.getSize().getWidth() / 2, (int) (list.getSize().getHeight() / 1.7));
         ImageIO.write(listScreenshot, "PNG", new File("./img/parking.png"));
         parking.navigate().refresh();
         parking.close();
@@ -96,6 +96,6 @@ public class FetchUNCC {
 
         listScreenshot.flush();
         System.out.println(
-                "\n\n********************************\n*** Done Fetching UNCC Pages ***\n********************************\n\n");
+                "\n********************************\n*** Done Fetching UNCC Pages ***\n********************************\n");
     }
 }
