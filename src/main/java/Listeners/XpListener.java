@@ -22,7 +22,10 @@ public class XpListener extends ListenerAdapter {
         {
             xpDict.putIfAbsent(event.getGuild().getId(), new ArrayList<String>());
 
-            if (xpDict.get(event.getGuild().getId()).contains(Objects.requireNonNull(event.getMember().getId())))
+            if(event.getMember() == null)
+                return;
+
+            if (xpDict.get(event.getGuild().getId()).contains(event.getMember().getId()))
                 return;
 
             ArrayList<String> members = xpDict.get(event.getGuild().getId());

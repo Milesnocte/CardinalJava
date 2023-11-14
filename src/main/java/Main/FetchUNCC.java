@@ -21,7 +21,6 @@ import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 import ru.yandex.qatools.ashot.AShot;
 import java.time.Duration;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeDriverLogLevel;
 import org.openqa.selenium.chrome.ChromeOptions;
 import java.util.concurrent.TimeUnit;
 
@@ -54,11 +53,11 @@ public class FetchUNCC {
                 "\n\n********************************\n***   Fetching UNCC Pages   ***\n********************************\n\n");
         System.setProperty("webdriver.gecko.driver", "chromedriver");
         System.setProperty("webdriver.chrome.verboseLogging", "true");
-        ChromeOptions options = new ChromeOptions().setHeadless(true).setLogLevel(ChromeDriverLogLevel.SEVERE);
 
+        ChromeOptions soviOptions = new ChromeOptions().addArguments("--headless=new");
         String soviLabel = FetchUNCC.openInfo("SoVi")[0].toLowerCase();
         if(soviLabel.equals("open")) {
-            WebDriver sovi = new ChromeDriver(options);
+            WebDriver sovi = new ChromeDriver(soviOptions);
             String soviurl = "https://app.safespace.io/api/display/live-occupancy/15da3cfa?view=percent";
             sovi.get(soviurl);
             sovi.manage().timeouts().implicitlyWait(Duration.ofSeconds(10L));
@@ -68,9 +67,10 @@ public class FetchUNCC {
             sovi.quit();
         }
 
+        ChromeOptions crownOptions = new ChromeOptions().addArguments("--headless=new");
         String crownLabel = FetchUNCC.openInfo("Social 704")[0].toLowerCase();
         if(crownLabel.equals("open")) {
-            WebDriver crown = new ChromeDriver(options);
+            WebDriver crown = new ChromeDriver(crownOptions);
             String crownurl = "https://app.safespace.io/api/display/live-occupancy/7a9c0a24?view=percent";
             crown.get(crownurl);
             crown.manage().timeouts().implicitlyWait(Duration.ofSeconds(10L));
@@ -80,7 +80,8 @@ public class FetchUNCC {
             crown.quit();
         }
 
-        WebDriver parking = new ChromeDriver(options);
+        ChromeOptions parkingOptions = new ChromeOptions().addArguments("--headless=new");
+        WebDriver parking = new ChromeDriver(parkingOptions);
         String parkingurl = "https://parkingavailability.charlotte.edu/";
         parking.get(parkingurl);
         parking.manage().timeouts().implicitlyWait(Duration.ofSeconds(10L));

@@ -46,7 +46,9 @@ public class ScheduledTask extends ListenerAdapter
                         Runtime.getRuntime().exec("sh cardinal.sh");
                         System.exit(0);
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        event.getJDA().getGuildById("433825343485247499")
+                                .getTextChannelById("989301601476943882")
+                                .sendMessage("Scheduled restart failed : ```" + e + "```").queue();
                     }
                 }
             }
