@@ -61,22 +61,6 @@ public class Menus implements ISlashCommand
     
     @Override
     public void run(ButtonInteractionEvent event) throws Exception {
-        if (Objects.equals(event.getComponent().getId(), "Alum_Bachelors")) {
-            SlashMenus.removeRoles(this.alumRoles, event);
-            event.getGuild().addRoleToMember(event.getMember(), event.getGuild().getRolesByName("Bachelors", true).get(0)).queue();
-            event.reply("Updated alum role!").setEphemeral(true).queue();
-        }
-        if (Objects.equals(event.getComponent().getId(), "Alum_Masters")) {
-            SlashMenus.removeRoles(this.alumRoles, event);
-            event.getGuild().addRoleToMember(event.getMember(), event.getGuild().getRolesByName("Masters", true).get(0)).queue();
-            event.reply("Updated alum role!").setEphemeral(true).queue();
-        }
-        if (Objects.equals(event.getComponent().getId(), "Alum_PHD")) {
-            SlashMenus.removeRoles(this.alumRoles, event);
-            event.getGuild().addRoleToMember(event.getMember(), event.getGuild().getRolesByName("PHD", true).get(0)).queue();
-            event.reply("Updated alum role!").setEphemeral(true).queue();
-        }
-
         if (Objects.equals(event.getComponent().getId(), "EventPing")) {
             Role Events = null;
             try {
